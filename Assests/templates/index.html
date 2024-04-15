@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Form Details</title>
+</head>
+<body>
+   <div class="signup-container">
+    <h1>signup Page</h1>
+  <form id="SignupForm" name="myForm">
+    <div class="input-group">
+      <label for="firstname">First Name:</label>
+      <input type="text" id="firstname" name="firstname" required>
+    </div>
+    <div class="input-group">
+      <label for="lastname">Last Name:</label>
+      <input type="text" id="lastname" name="lasttname" required>
+    </div>
+    <div class="input-group">
+      <label for="userid">User ID:</label>
+      <input type="text" id="userid" name="userid" required>
+    </div>
+    <div class="input-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="input-group">
+      <label for="mblenum">Mobile No:</label>
+      <input type="tel" id="mblenum" name="mblenum" required>
+    </div>
+    <div class="input-group">
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+  <button type="submit" onclick="validateForm()">signup</button>
+
+</form>
+</div>
+<script scr="signup"></script>
+
+</body>
+
+<script>
+function validateForm() {
+  let a = document.forms["myForm"]["firstname"].value;
+  let b = document.forms["myForm"]["lasttname"].value;
+  let c = document.forms["myForm"]["userid"].value;
+  let d = document.forms["myForm"]["password"].value;
+  let e = document.forms["myForm"]["mblenum"].value;
+  let f = document.forms["myForm"]["email"].value;
+  console.log(a)
+  console.log(b)
+  if (a == "") {
+    alert("FirstName must be filled out");
+    return false;
+  }
+  if (b == "") {
+    alert("LastName must be filled out");
+    return false;
+  }
+
+    let PARAMS = {
+    "firstname":a,
+    "lasttname":b,
+    "userid":c,
+    "password":d,
+    "mblenum":e,
+    "email":f,
+    };
+    const url = 'http://127.0.0.1:8000/';
+    fetch(url + "Register", { 
+        method: 'POST',
+        body: JSON.stringify(PARAMS),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("API Response:", data);
+    })
+
+}
+</script>
+
+
+</html>
